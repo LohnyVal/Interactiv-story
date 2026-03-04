@@ -1,0 +1,23 @@
+body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: gray;
+}
+
+h1{
+    background-color: red;
+}
+
+#text{
+    background-color: red;
+}
+
+h1, #text, #buttons{
+    margin: 30px;
+}
+
+
