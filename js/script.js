@@ -13,7 +13,7 @@ const scenes = [
   },
   {
     id: 2,
-    text: "Marcus’s house stands only minutes away from the burning flames. Heat presses against the walls, and the air is thick with smoke. His phone suddenly vibrates in his hand",
+    text: "Marcus house stands only minutes away from the burning flames. Heat presses against the walls, and the air is thick with smoke. His phone suddenly vibrates in his hand",
     buttons: [
       {
         label: "Evacuate",
@@ -23,7 +23,7 @@ const scenes = [
       {
         label: "Back",
         color: "#FF0000",
-        targetSceneId: "scene1_wildfireWakeup",
+        targetSceneId: 1,
       },
       {
         label: "Save house",
@@ -76,7 +76,7 @@ const scenes = [
       {
         label: "Back",
         color: "#FF0000",
-        targetSceneId: "scene1_wildfireWakeup",
+        targetSceneId: 4,
       },
       {
         label: "Go by foot",
@@ -113,7 +113,7 @@ const scenes = [
       {
         label: "Next",
         color: "#33CE15",
-        targetSceneId: 5,
+        targetSceneId: 8,
       },
     ],
   },
@@ -537,7 +537,7 @@ const scenes = [
       {
         label: "Next",
         color: "#33CE15",
-        targetSceneId: 35,
+        targetSceneId: 36,
       },
     ],
   },
@@ -791,3 +791,9 @@ const scenes = [
   buttons: [],
 }
 ];
+
+let currentScene = 1;
+
+
+
+
