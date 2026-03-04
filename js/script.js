@@ -800,31 +800,24 @@ function startStory() {
   let intro = document.getElementById("intro");
   intro.style.display = "none";
   console.log(scene);
-  storyContainer.innerHTML += `<h2>${scene.text}</h2>`;
+  storyContainer.innerHTML += `<h2 class="text">${scene.text}</h2>`;
   let buttons = scene.buttons || [];
   if (buttons.length > 0) {
     buttons.forEach((button) => {
       checkColor(button);
-
-      //   if(button.label.includes("Back")) {
-      //   storyContainer.innerHTML += `<button class="back"
-      //   onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
-      // }
     });
   }
 
-  // if(scene.timeout || scene.buttons.length < 0){
-  // setTimeout(() =>{
-  // }, 600)
+  
 }
 
-// }
+
 
 function nextScene(id) {
-  console.log(id);
   storyContainer.innerHTML = "";
   scene = scenes[id - 1];
-  storyContainer.innerHTML += `<h2>${scene.text}</h2>`;
+  
+  storyContainer.innerHTML += `<h2 class="text">${scene.text}</h2>`;
 
   let buttons = scene.buttons || [];
   console.log(buttons);
@@ -832,8 +825,6 @@ function nextScene(id) {
     buttons.forEach((button) => {
 
       checkColor(button);
-      // storyContainer.innerHTML += `<button style="background-color:${buttons.color}"
-      // onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
     });
   }
 }
@@ -849,6 +840,6 @@ function checkColor(button) {
         onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
       } else {
         storyContainer.innerHTML += `<button style="background-color:${button.color}"
-        onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
+        onclick="nextScene(${button.targetSceneId})" class="choices">${button.label}</button>`;
       }
 }
