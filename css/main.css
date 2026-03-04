@@ -1,23 +1,73 @@
 body{
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
     background-color: gray;
+    margin: 0;
+    overflow: hidden;
+}
+.next {
+    background-color: green;
 }
 
-h1{
+
+.back {
     background-color: red;
 }
 
-#text{
-    background-color: red;
+#wrapper img{
 }
 
-h1, #text, #buttons{
-    margin: 30px;
+
+#earth{
+    
 }
 
+#sun{
+    
+}
+
+#moon{
+    
+}
+
+#homeless{
+    position: absolute;
+    right: -20px;
+    bottom: -10px;
+    width: 89%;
+    transform: rotate(0.5deg);
+    z-index: -1;
+}
+
+#guy{
+    bottom: 0;
+    z-index: 2;
+    width: 150px;
+        
+}
+
+@keyframes rotateSun {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotatEarth {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateMoon {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
 
