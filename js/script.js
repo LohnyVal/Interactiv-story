@@ -794,13 +794,19 @@ const scenes = [
 const intro = [{}, {}, {}];
 
 let storyContainer = document.getElementById("story");
+let buttonContainer = document.getElementById("buttons");
+let infoContainer = document.getElementById("info");
 let scene = scenes[0];
+
+
+let guy = document.getElementById("guy");
+let guyPosition = 850;
 
 function startStory() {
   let intro = document.getElementById("intro");
   intro.style.display = "none";
   console.log(scene);
-  storyContainer.innerHTML += `<h2 class="text">${scene.text}</h2>`;
+  infoContainer.innerHTML += `<h2 class="text">${scene.text}</h2>`;
   let buttons = scene.buttons || [];
   if (buttons.length > 0) {
     buttons.forEach((button) => {
@@ -814,13 +820,13 @@ function startStory() {
 
 
 function nextScene(id) {
-  storyContainer.innerHTML = "";
+  infoContainer.innerHTML = "";
+  buttonContainer.innerHTML = "";
   scene = scenes[id - 1];
   
-  storyContainer.innerHTML += `<h2 class="text">${scene.text}</h2>`;
+  infoContainer.innerHTML += `<h2 class="text">${scene.text}</h2>`;
 
   let buttons = scene.buttons || [];
-  console.log(buttons);
   if (buttons.length > 0) {
     buttons.forEach((button) => {
 
@@ -832,14 +838,43 @@ function nextScene(id) {
 
 
 function checkColor(button) {
-        if (button.label.includes("Next")) {
-        storyContainer.innerHTML += `<button class="next"
-        onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
+  console.log(buttonContainer);
+  console.log(button);
+  if (button.label.includes("Next")) {
+    console.log("this should work")
+    buttonContainer.innerHTML += `<button class="next"
+    onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
+    console.log(buttonContainer);
       } else if (button.label.includes("Back")) {
-        storyContainer.innerHTML += `<button class="back"
+        buttonContainer.innerHTML += `<button class="back"
         onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
       } else {
-        storyContainer.innerHTML += `<button style="background-color:${button.color}"
+        buttonContainer.innerHTML += `<button style="background-color:${button.color}"
         onclick="nextScene(${button.targetSceneId})" class="choices">${button.label}</button>`;
       }
 }
+
+
+document.addEventListener("click", (e) =>{
+  const smoke = document.createElement("div");
+  smoke.classList.add("smoke");
+  smoke.style.left = e.clientX + "px";
+  smoke.style.top = e.clientY + "px";
+
+  document.body.appendChild(smoke);
+  setTimeout(() =>{
+    smoke.remove()
+  }, 1500)
+
+})
+
+
+document.addEventListener("keydown", (e) =>{
+  if(e.code === "ArrowRight"){
+    guyPosition += 10;
+    guy.style.left = guyPosition + "px";
+  }else if(e.code === "ArrowLeft"){
+    guyPosition -= 10;
+    guy.style.left = guyPosition + "px";
+  }
+})
