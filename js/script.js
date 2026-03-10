@@ -155,7 +155,7 @@ const scenes = [
   },
   {
     id: 10,
-    text: "Suddenly, Marcus sees a faint shadow inside the smoke, a family of four. He stops, hesitating, unsure of what he should do.",
+    text: "Marcus lets the family in and keeps driving, moving safely away from the fire.",
     buttons: [
       {
         label: "Back",
@@ -171,7 +171,7 @@ const scenes = [
   },
   {
     id: 11,
-    text: "Suddenly, Marcus sees a faint shadow inside the smoke, a family of four. He stops, hesitating, unsure of what he should do.",
+    text: "Marcus helps the people he can and keeps himself moving to safety.",
     buttons: [
       {
         label: "Back",
@@ -261,7 +261,7 @@ const scenes = [
   },
   {
     id: 18,
-    text: "Marcus takes on his jacket and starts his journey throught the smoke.",
+    text: "On the way, Marcus notices an elderly woman struggling, fighting for her life as she tries to escape the angry fire.",
     buttons: [
       {
         label: "Back",
@@ -346,7 +346,7 @@ const scenes = [
   },
   {
     id: 23,
-    text: "Marcus walk tought the smoke, batteling the smoke and ash going throught the air. He sees a more clear area and sees other people. ",
+    text: "Both Marcus and the elderly woman make it out of the danger.",
     buttons: [
       {
         label: "Back",
@@ -791,7 +791,52 @@ const scenes = [
   },
 ];
 
-const intro = [{}, {}, {}];
+
+const infoScenes = [
+  {
+    id: 1,
+    title: "You are playing as Marcus",
+    description: " You are playing as a young adult named Marcus. He lives in California, where wildfires have become more frequent and destructive due to the rising temperatures.",
+    buttons: [
+      { label: "Next", targetSceneId: 2, color: "#33CE15" }
+    ]
+  },
+  {
+    id: 2,
+    title: "How to play the game",
+    description: "You have to make difficult choices. Choice whats feels right to you. You determine Marcus´s outcome",
+    buttons: [
+      { label: "Back", targetSceneId: 1, color: "#FF0000" },
+      { label: "Next", targetSceneId: 3, color: "#33CE15" }
+    ]
+  },
+  {
+    id: 3,
+    description: "Careful, each choice has its own Consequence",
+    buttons: [
+      { label: "Back", targetSceneId: 2, color: "#FF0000" },
+      { label: "Next", targetSceneId: 4, color: "#33CE15" }
+    ]
+  },
+  {
+    id: 4,
+    description: "Let´s",
+    buttons: [
+      { label: "Back", targetSceneId: 3, color: "#FF0000" },
+      { label: "Next", targetSceneId: 5, color: "#33CE15" }
+    ]
+  },
+  {
+    id: 5,
+    description: "Let´s",
+    buttons: [
+      { label: "Back", targetSceneId: 4, color: "#FF0000" },
+      { label: "Start Story", targetSceneId: "story", color: "#33CE15" }
+    ]
+  }
+];
+
+const typeWriterSound = new Audio("./audio/typeWriter.wav")
 
 let storyContainer = document.getElementById("story");
 let buttonContainer = document.getElementById("buttons");
@@ -800,13 +845,22 @@ let scene = scenes[0];
 
 
 let guy = document.getElementById("guy");
-let guyPosition = 850;
+let guyPositionX = parseInt(window.getComputedStyle(guy).left) || 0;
+let guyPositionY = 0;
+let isJumping = false;
+let screenWidth = window.innerWidth;
+
+
+
+
 
 function startStory() {
   let intro = document.getElementById("intro");
   intro.style.display = "none";
-  console.log(scene);
-  infoContainer.innerHTML += `<h2 class="text">${scene.text}</h2>`;
+  const textElement = document.createElement("h2");
+  textElement.classList.add("text");
+  infoContainer.appendChild(textElement);
+  typeWriter(scene.text, textElement)
   let buttons = scene.buttons || [];
   if (buttons.length > 0) {
     buttons.forEach((button) => {
@@ -824,7 +878,11 @@ function nextScene(id) {
   buttonContainer.innerHTML = "";
   scene = scenes[id - 1];
   
-  infoContainer.innerHTML += `<h2 class="text">${scene.text}</h2>`;
+
+  const textElement = document.createElement("h2");
+  textElement.classList.add("text");
+  infoContainer.appendChild(textElement);
+  typeWriter(scene.text, textElement);
 
   let buttons = scene.buttons || [];
   if (buttons.length > 0) {
@@ -856,25 +914,81 @@ function checkColor(button) {
 
 
 document.addEventListener("click", (e) =>{
-  const smoke = document.createElement("div");
-  smoke.classList.add("smoke");
-  smoke.style.left = e.clientX + "px";
-  smoke.style.top = e.clientY + "px";
-
-  document.body.appendChild(smoke);
-  setTimeout(() =>{
-    smoke.remove()
-  }, 1500)
-
-})
-
-
-document.addEventListener("keydown", (e) =>{
-  if(e.code === "ArrowRight"){
-    guyPosition += 10;
-    guy.style.left = guyPosition + "px";
-  }else if(e.code === "ArrowLeft"){
-    guyPosition -= 10;
-    guy.style.left = guyPosition + "px";
+  if(scene.text.toLowerCase().includes("smoke")){
+    const smoke = document.createElement("div");
+    smoke.classList.add("smoke");
+    smoke.style.left = e.clientX + "px";
+    smoke.style.top = e.clientY + "px";
+  
+    document.body.appendChild(smoke);
+    setTimeout(() =>{
+      smoke.remove()
+    }, 1500)
   }
+
 })
+
+
+
+document.addEventListener("keydown", (e) => {
+
+  if (e.code === "ArrowRight" || e.code === "KeyD") {
+    if (guyPositionX < screenWidth - guy.offsetWidth) {
+      guyPositionX += 10;
+      guy.style.left = guyPositionX + "px";
+    }
+  }
+
+
+  if (e.code === "ArrowLeft" || e.code === "KeyA") {
+    if (guyPositionX > 380) {
+      guyPositionX -= 10;
+      guy.style.left = guyPositionX + "px";
+    }
+  }
+
+
+  if (e.code === "Space" && !isJumping || e.code === "ArrowUp" && !isJumping || e.code === "KeyW" && !isJumping) {
+    isJumping = true;
+    let jumpHeight = 180; 
+    let jumpUp = setInterval(() => {
+      if (guyPositionY < jumpHeight) {
+        guyPositionY += 10;      
+        guy.style.bottom = guyPositionY + "px";
+      } else {
+        clearInterval(jumpUp);
+
+        let fallDown = setInterval(() => {
+          if (guyPositionY > 43) {
+            guyPositionY -= 10;
+            guy.style.bottom = guyPositionY + "px";
+          } else {
+            clearInterval(fallDown);
+            isJumping = false; 
+          }
+        }, 20);
+      }
+    }, 20);
+  }
+});
+
+function typeWriter(text, element){
+  element.innerHTML = "";
+  let i = 0;
+  function typeNextCharacter(){
+    if(i < text.length){
+      element.innerHTML += text.charAt(i);
+      typeWriterSound.currentTime = 0;
+      typeWriterSound.play();
+
+      i++
+
+      let typeWriterSpeed = Number(document.getElementById("speedTypeWriter").value);
+      setTimeout(typeNextCharacter, typeWriterSpeed)
+    }
+  }
+  typeNextCharacter()
+}
+
+
+

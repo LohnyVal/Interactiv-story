@@ -26,17 +26,19 @@ body{
 
 #title{
     color: white;
-    font-size: 4rem;
+    font-size: 3rem;
     margin: 0;
     padding: 0;
-    background-color: red;
+    width: 97%;
+    margin-top: 70px;
 }
 
 
 #startDiv{
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
+    width: 100%;
 }
 
 
@@ -64,8 +66,13 @@ body{
 
 .text{
     color: white;
+    background-color: rgba(0, 0, 0, 0.351);
     width: 50%;
     margin-bottom: 60px;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 40px;
+    backdrop-filter: blur(5px);
 }
 
 
@@ -78,6 +85,11 @@ body{
     cursor: pointer;
 }
 
+.next:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 25px orange;
+}
+
 .back{
     background-color: red;
     width: 200px;
@@ -87,6 +99,11 @@ body{
     cursor: pointer;
 }
 
+.back:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 25px orange;
+}
+
 .choices{
     width: 200px;
     height: 70px;
@@ -94,9 +111,15 @@ body{
     cursor: pointer;
 }
 
+.choices:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 25px orange;
+}
+
 
 #startButton{
     position: relative;
+    margin-top: 340px;
     width: 200px;
     height: 60px;
     border-radius: 10px;
@@ -202,6 +225,17 @@ body{
     animation: blinkingStars 1s infinite;
 }
 
+#options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    width: 200px;
+    height: 30px;
+}
+
+
+
 
 @keyframes rotateMoon{
     0% { 
@@ -280,3 +314,4 @@ body{
         transform: translateY(-160px) scale(3.5); opacity: 0; 
     }
 }
+
