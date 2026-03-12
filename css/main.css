@@ -66,13 +66,13 @@ body{
 
 .text{
     color: white;
-    background-color: rgba(0, 0, 0, 0.351);
+    background-color: rgba(128, 128, 128, 0.278);
     width: 50%;
     margin-bottom: 60px;
     border: 2px solid white;
     border-radius: 10px;
     padding: 40px;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
 }
 
 

@@ -947,41 +947,18 @@ document.addEventListener("keydown", (e) => {
     }
   }
 
-
-  if (e.code === "Space" && !isJumping || e.code === "ArrowUp" && !isJumping || e.code === "KeyW" && !isJumping) {
-    isJumping = true;
-    let jumpHeight = 180; 
-    let jumpUp = setInterval(() => {
-      if (guyPositionY < jumpHeight) {
-        guyPositionY += 10;      
-        guy.style.bottom = guyPositionY + "px";
-      } else {
-        clearInterval(jumpUp);
-
-        let fallDown = setInterval(() => {
-          if (guyPositionY > 43) {
-            guyPositionY -= 10;
-            guy.style.bottom = guyPositionY + "px";
-          } else {
-            clearInterval(fallDown);
-            isJumping = false; 
-          }
-        }, 20);
-      }
-    }, 20);
-  }
 });
 
 function typeWriter(text, element){
   element.innerHTML = "";
-  let i = 0;
+  let characterIndexPlace = 0;
   function typeNextCharacter(){
-    if(i < text.length){
-      element.innerHTML += text.charAt(i);
+    if(characterIndexPlace < text.length){
+      element.innerHTML += text.charAt(characterIndexPlace);
       typeWriterSound.currentTime = 0;
       typeWriterSound.play();
 
-      i++
+      characterIndexPlace++
 
       let typeWriterSpeed = Number(document.getElementById("speedTypeWriter").value);
       setTimeout(typeNextCharacter, typeWriterSpeed)
