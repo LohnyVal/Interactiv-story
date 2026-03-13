@@ -24,6 +24,9 @@ body{
     text-align: center;
 }
 
+
+
+
 #title{
     color: white;
     font-size: 3rem;
@@ -44,7 +47,7 @@ body{
 
 #story{
     flex: 1;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -52,6 +55,15 @@ body{
 }
 
 
+#introScenes {
+    display: none;
+    height: 100%;
+}
+
+
+#startsInfo {
+    display: none;
+}
 #buttons{
     display: flex;
     flex-direction: row;
@@ -62,6 +74,11 @@ body{
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+}
+
+#starsInfo{
+    height: 100%;
+    animation: blinkingStars 1s infinite;
 }
 
 .text{
@@ -142,7 +159,7 @@ body{
 
 #startButton:hover::before{
     opacity: 1;
-    animation: startButtonAnimation 20s linear infinite;
+    animation: startButtonAnimation 10s linear infinite;
 }
 
 

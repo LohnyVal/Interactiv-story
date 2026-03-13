@@ -791,93 +791,130 @@ const scenes = [
   },
 ];
 
-
 const infoScenes = [
   {
     id: 1,
     title: "You are playing as Marcus",
-    description: " You are playing as a young adult named Marcus. He lives in California, where wildfires have become more frequent and destructive due to the rising temperatures.",
-    buttons: [
-      { label: "Next", targetSceneId: 2, color: "#33CE15" }
-    ]
+    description:
+      "You are playing as a young adult named Marcus. He lives in California, where wildfires have become more frequent and destructive due to the rising temperatures.",
+    buttons: [{ label: "Next", targetSceneId: 2, color: "#33CE15" }],
   },
   {
     id: 2,
     title: "How to play the game",
-    description: "You have to make difficult choices. Choice whats feels right to you. You determine Marcus´s outcome",
+    description:
+      "You have to make difficult choices. Choice whats feels right to you. You determine Marcus´s outcome",
     buttons: [
       { label: "Back", targetSceneId: 1, color: "#FF0000" },
-      { label: "Next", targetSceneId: 3, color: "#33CE15" }
-    ]
+      { label: "Next", targetSceneId: 3, color: "#33CE15" },
+    ],
   },
   {
     id: 3,
     description: "Careful, each choice has its own Consequence",
     buttons: [
       { label: "Back", targetSceneId: 2, color: "#FF0000" },
-      { label: "Next", targetSceneId: 4, color: "#33CE15" }
-    ]
+      { label: "Next", targetSceneId: 4, color: "#33CE15" },
+    ],
   },
   {
     id: 4,
     description: "Let´s",
     buttons: [
       { label: "Back", targetSceneId: 3, color: "#FF0000" },
-      { label: "Next", targetSceneId: 5, color: "#33CE15" }
-    ]
+      { label: "Next", targetSceneId: 5, color: "#33CE15" },
+    ],
   },
   {
     id: 5,
-    description: "Let´s",
+    description: "GO",
     buttons: [
       { label: "Back", targetSceneId: 4, color: "#FF0000" },
-      { label: "Start Story", targetSceneId: "story", color: "#33CE15" }
-    ]
-  }
+      { label: "Start Story", targetSceneId: "story", color: "#33CE15" },
+    ],
+  },
 ];
 
-const typeWriterSound = new Audio("./audio/typeWriter.wav")
 
 let storyContainer = document.getElementById("story");
 let buttonContainer = document.getElementById("buttons");
 let infoContainer = document.getElementById("info");
 let scene = scenes[0];
 
-
 let guy = document.getElementById("guy");
-let guyPositionX = parseInt(window.getComputedStyle(guy).left) || 0;
+let guyPositionX = parseInt(window.getComputedStyle(guy).right) || 0;
 let guyPositionY = 0;
 let isJumping = false;
 let screenWidth = window.innerWidth;
 
+let introSceneContainer = document.getElementById("introScenes");
 
+function loadStory() {
+  buttonContainer.innerHTML = "";
 
+  document.getElementById("landing").style.display = "none";
+  introSceneContainer.style.display = "block";
+  scene = infoScenes[0];
 
+  const textElement = document.createElement("h2");
+  introSceneContainer.innerHTML += `<h1 style="color:white">${scene.title}</h1>`;
+  introSceneContainer.innerHTML += `<h2 style="color:white">${scene.description}</h2>`;
+  scene.buttons.forEach((button) => {
+    introSceneContainer.innerHTML += `<button style="background-color:${button.color}" onclick="onNext(${button.targetSceneId})">${button.label}</button>`;
+  });
+}
+
+function onNext(id) {
+  console.log(id, "going to next");
+  introSceneContainer.innerHTML = "";
+  scene = infoScenes[id - 1];
+
+  if (id === 5) {
+
+    let button1 = scene.buttons[0];
+    let button2 = scene.buttons[1];
+
+    console.log(scene.buttons)
+    introSceneContainer.innerHTML += `<h1 style="color:white">${scene.title}</h1>`;
+    introSceneContainer.innerHTML += `<h2 style="color:white">${scene.description}</h2>`;
+    introSceneContainer.innerHTML += `<button style="background-color:${button1.color}" onclick="onNext(${button1.targetSceneId})">${button1.label}</button>`;
+    introSceneContainer.innerHTML += `<button style="background-color:${button2.color}" onclick="startStory()">${button2.label}</button>`;
+
+    let intro = document.getElementById("intro");
+  intro.style.display = "none";
+  } else {
+    
+      introSceneContainer.innerHTML += `<h1 style="color:white">${scene.title}</h1>`;
+      introSceneContainer.innerHTML += `<h2 style="color:white">${scene.description}</h2>`;
+      scene.buttons.forEach((button) => {
+        introSceneContainer.innerHTML += `<button style="background-color:${button.color}" onclick="onNext(${button.targetSceneId})">${button.label}</button>`;
+      });
+
+  }
+}
 
 function startStory() {
   let intro = document.getElementById("intro");
   intro.style.display = "none";
+    introSceneContainer.innerHTML = "";
+  scene = scenes[0];
+  console.log(scene)
   const textElement = document.createElement("h2");
   textElement.classList.add("text");
   infoContainer.appendChild(textElement);
-  typeWriter(scene.text, textElement)
+  typeWriter(scene.text, textElement);
   let buttons = scene.buttons || [];
   if (buttons.length > 0) {
     buttons.forEach((button) => {
       checkColor(button);
     });
   }
-
-  
 }
-
-
 
 function nextScene(id) {
   infoContainer.innerHTML = "";
   buttonContainer.innerHTML = "";
   scene = scenes[id - 1];
-  
 
   const textElement = document.createElement("h2");
   textElement.classList.add("text");
@@ -887,85 +924,70 @@ function nextScene(id) {
   let buttons = scene.buttons || [];
   if (buttons.length > 0) {
     buttons.forEach((button) => {
-
       checkColor(button);
     });
   }
 }
 
-
-
 function checkColor(button) {
-  console.log(buttonContainer);
-  console.log(button);
   if (button.label.includes("Next")) {
-    console.log("this should work")
+    console.log("this should work");
     buttonContainer.innerHTML += `<button class="next"
     onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
     console.log(buttonContainer);
-      } else if (button.label.includes("Back")) {
-        buttonContainer.innerHTML += `<button class="back"
+  } else if (button.label.includes("Back")) {
+    buttonContainer.innerHTML += `<button class="back"
         onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
-      } else {
-        buttonContainer.innerHTML += `<button style="background-color:${button.color}"
+  } else {
+    buttonContainer.innerHTML += `<button style="background-color:${button.color}"
         onclick="nextScene(${button.targetSceneId})" class="choices">${button.label}</button>`;
-      }
+  }
 }
 
-
-document.addEventListener("click", (e) =>{
-  if(scene.text.toLowerCase().includes("smoke")){
+document.addEventListener("click", (e) => {
+  if (scene.text){
     const smoke = document.createElement("div");
     smoke.classList.add("smoke");
     smoke.style.left = e.clientX + "px";
     smoke.style.top = e.clientY + "px";
-  
+
     document.body.appendChild(smoke);
-    setTimeout(() =>{
-      smoke.remove()
-    }, 1500)
+    setTimeout(() => {
+      smoke.remove();
+    }, 1500);
   }
-
-})
-
-
+});
 
 document.addEventListener("keydown", (e) => {
-
-  if (e.code === "ArrowRight" || e.code === "KeyD") {
+  if (e.code === "ArrowRight" || e.code === "KeyD") {
     if (guyPositionX < screenWidth - guy.offsetWidth) {
       guyPositionX += 10;
       guy.style.left = guyPositionX + "px";
     }
   }
 
-
-  if (e.code === "ArrowLeft" || e.code === "KeyA") {
+  if (e.code === "ArrowLeft" || e.code === "KeyA") {
     if (guyPositionX > 380) {
       guyPositionX -= 10;
       guy.style.left = guyPositionX + "px";
     }
   }
-
 });
 
-function typeWriter(text, element){
+function typeWriter(text, element) {
   element.innerHTML = "";
   let characterIndexPlace = 0;
-  function typeNextCharacter(){
-    if(characterIndexPlace < text.length){
+  function typeNextCharacter() {
+    if (characterIndexPlace < text.length) {
       element.innerHTML += text.charAt(characterIndexPlace);
-      typeWriterSound.currentTime = 0;
-      typeWriterSound.play();
 
-      characterIndexPlace++
+      characterIndexPlace++;
 
-      let typeWriterSpeed = Number(document.getElementById("speedTypeWriter").value);
-      setTimeout(typeNextCharacter, typeWriterSpeed)
+      let typeWriterSpeed = Number(
+        document.getElementById("speedTypeWriter").value,
+      );
+      setTimeout(typeNextCharacter, typeWriterSpeed);
     }
   }
-  typeNextCharacter()
+  typeNextCharacter();
 }
-
-
-
