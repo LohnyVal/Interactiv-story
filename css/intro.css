@@ -1,8 +1,35 @@
-body{
+html, body{
     margin: 0;
     background-color: black;
+    height: 100%;
+    overflow: hidden;
 }
-
 #starsIntroBackground{
     position: absolute;
+    animation: blinkingStars 1s infinite;
+    
+}
+
+.text{
+    color: white;
+}
+
+.description{
+    color: white;
+    
+}
+
+@keyframes blinkingStars{
+    25% { 
+        opacity: 1; 
+    }
+    50% { 
+        opacity: 0.5; 
+    }
+    75% {
+         opacity: 0.8; 
+        }
+    100% { 
+        opacity: 1; 
+    }
 }
