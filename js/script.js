@@ -847,10 +847,12 @@ let scene = scenes[0];
 let guy = document.getElementById("guy");
 let guyPositionX = parseInt(window.getComputedStyle(guy).left) || 0;
 let guyPositionY = 0;
-let isJumping = false;
 let screenWidth = window.innerWidth;
 
 
+function loadIntro(){
+  window.location.href = "../html/intro.html";
+}
 
 
 

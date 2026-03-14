@@ -43,11 +43,12 @@ const infoScenes = [
 ];
 
 
+
+
+
+
 function startIntro() {
-    console.log("start intor")
-
-
 
 }
 
-// startIntro();
+startIntro();
