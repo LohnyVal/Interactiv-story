@@ -26,7 +26,7 @@ const infoScenes = [
     buttons: [{ label: "Back", 
     targetSceneId: 3, 
     color: "#FF0000" }, 
-    { label: "Next", targetSceneId: 5, color: "#33CE15" }
+    { label: "Next", targetSceneId: 5, color: "#33CE5" }
   ] 
 },
   { id: 5, 
@@ -71,10 +71,10 @@ function gotoNextScene() {
 
 function nextIntroScene(id) {
   if (id === "story") {
-    window.location.href = "story.html";  // Går til story
+    window.location.href = "story.html";  // Går til story.html
     return;
   }
-  scene = infoScenes.find(s => s.id === id); // Jeg vet ikke hvorfor jeg ikke kunne bruke [id - 1]! Den finnner iden slik at den sjekke om at scene.id er det sanne som id som vi paser i koden 
+  scene = infoScenes[id - 1]; 
   gotoNextScene();
 }
 

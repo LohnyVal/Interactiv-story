@@ -7,8 +7,10 @@ html, body{
 #starsIntroBackground{
     position: absolute;
     animation: blinkingStars 1s infinite;
+    z-index: 1;
     
 }
+
 
 .text{
     color: white;

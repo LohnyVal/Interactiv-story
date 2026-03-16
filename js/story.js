@@ -791,27 +791,9 @@ const scenes = [
   },
 ];
 
+let storyContainer = document.getElementById("story");
+let infoContainer = document.getElementById("info");
+let buttonContainer = document.getElementById("buttons");
 
-function nextScene(id) {
-    infoContainer.innerHTML = ""; 
-    buttonContainer.innerHTML = "";
-    scene = scenes[id - 1];
-    const textElement = document.createElement("h2");
-    textElement.classList.add("text");
-    infoContainer.appendChild(textElement);
-    typeWriter(scene.text, textElement);
+let scene = scenes[0];
 
-    let buttons = scene.buttons || [];
-    buttons.forEach((button) =>{
-    const buttonElement = document.createElement("button");
-
-  })
-    if (buttons.length > 0) {
-     buttons.forEach((button) => {
-
-      checkColor(button);
-    });
-  }
-}
-
-nextScene()
