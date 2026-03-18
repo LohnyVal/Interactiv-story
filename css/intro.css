@@ -3,14 +3,31 @@ html, body{
     background-color: black;
     height: 100%;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #starsIntroBackground{
-    position: absolute;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
     animation: blinkingStars 1s infinite;
-    z-index: 1;
+    pointer-events: none;
     
 }
 
+.intro{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    width: 50%;
+    z-index: 1; 
+}
 
 .text{
     color: white;

@@ -797,3 +797,38 @@ let buttonContainer = document.getElementById("buttons");
 
 let scene = scenes[0];
 
+function nextScene(id) {
+  infoContainer.innerHTML = "";
+  buttonContainer.innerHTML = "";
+  scene = scenes[id - 1];
+  const textElement = document.createElement("h2");
+  textElement.textContent = scene.text;
+  textElement.classList.add("text");
+  infoContainer.appendChild(textElement);
+  let buttons = scene.buttons || [];
+  if (buttons.length > 0) {
+    buttons.forEach((button) => {
+
+      checkColor(button);
+    });
+  }
+}
+
+
+
+function checkColor(button) {
+  if (button.label.includes("Next")) {
+    buttonContainer.innerHTML += `<button class="next"
+    onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
+    console.log(buttonContainer);
+      } else if (button.label.includes("Back")) {
+        buttonContainer.innerHTML += `<button class="back"
+        onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
+      } else {
+        buttonContainer.innerHTML += `<button style="background-color:${button.color}"
+        onclick="nextScene(${button.targetSceneId})" class="choices">${button.label}</button>`;
+      }
+}
+
+
+nextScene(1)

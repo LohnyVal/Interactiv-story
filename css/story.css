@@ -1,9 +1,62 @@
+*{
+    margin: 0;
+}
+
+
 body{
     background-color: black;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+
+}
+
+.back, .next, .choices{
+    width: 200px;
+    height: 60px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.back, .next, .choices:hover{
+    transform: scale(1.05);
 }
 
 #starsStoryBackground{
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
     animation: blinkingStars 1s infinite
+}
+
+
+#speedTypeWriter{
+    position: absolute;
+    z-index: 2;
+    top: 60%;
+    left: 46.5%;
+}
+
+#story{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    width: 50%;
+    z-index: 1;
+    
+}
+
+.text{
+    color: white;
 }
 
 

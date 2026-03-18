@@ -26,7 +26,7 @@ const infoScenes = [
     buttons: [{ label: "Back", 
     targetSceneId: 3, 
     color: "#FF0000" }, 
-    { label: "Next", targetSceneId: 5, color: "#33CE5" }
+    { label: "Next", targetSceneId: 5, color: "#33CE15" }
   ] 
 },
   { id: 5, 
@@ -71,7 +71,7 @@ function gotoNextScene() {
 
 function nextIntroScene(id) {
   if (id === "story") {
-    window.location.href = "story.html";  // Går til story.html
+    window.location.href = "story.html";  
     return;
   }
   scene = infoScenes[id - 1]; 
