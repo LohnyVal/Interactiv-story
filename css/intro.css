@@ -1,0 +1,54 @@
+html, body{
+    margin: 0;
+    background-color: black;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#starsIntroBackground{
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    animation: blinkingStars 1s infinite;
+    pointer-events: none;
+    
+}
+
+.intro{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    width: 50%;
+    z-index: 1; 
+}
+
+.text{
+    color: white;
+}
+
+.description{
+    color: white;
+    
+}
+
+@keyframes blinkingStars{
+    25% { 
+        opacity: 1; 
+    }
+    50% { 
+        opacity: 0.5; 
+    }
+    75% {
+         opacity: 0.8; 
+        }
+    100% { 
+        opacity: 1; 
+    }
+}

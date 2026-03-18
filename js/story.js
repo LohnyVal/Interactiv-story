@@ -791,101 +791,21 @@ const scenes = [
   },
 ];
 
-
-const infoScenes = [
-  {
-    id: 1,
-    title: "You are playing as Marcus",
-    description: " You are playing as a young adult named Marcus. He lives in California, where wildfires have become more frequent and destructive due to the rising temperatures.",
-    buttons: [
-      { label: "Next", targetSceneId: 2, color: "#33CE15" }
-    ]
-  },
-  {
-    id: 2,
-    title: "How to play the game",
-    description: "You have to make difficult choices. Choice whats feels right to you. You determine Marcus´s outcome",
-    buttons: [
-      { label: "Back", targetSceneId: 1, color: "#FF0000" },
-      { label: "Next", targetSceneId: 3, color: "#33CE15" }
-    ]
-  },
-  {
-    id: 3,
-    description: "Careful, each choice has its own Consequence",
-    buttons: [
-      { label: "Back", targetSceneId: 2, color: "#FF0000" },
-      { label: "Next", targetSceneId: 4, color: "#33CE15" }
-    ]
-  },
-  {
-    id: 4,
-    description: "Let´s",
-    buttons: [
-      { label: "Back", targetSceneId: 3, color: "#FF0000" },
-      { label: "Next", targetSceneId: 5, color: "#33CE15" }
-    ]
-  },
-  {
-    id: 5,
-    description: "Let´s",
-    buttons: [
-      { label: "Back", targetSceneId: 4, color: "#FF0000" },
-      { label: "Start Story", targetSceneId: "story", color: "#33CE15" }
-    ]
-  }
-];
-
-const typeWriterSound = new Audio("./audio/typeWriter.wav")
-
 let storyContainer = document.getElementById("story");
-let buttonContainer = document.getElementById("buttons");
 let infoContainer = document.getElementById("info");
+let buttonContainer = document.getElementById("buttons");
+
 let scene = scenes[0];
-
-
-let guy = document.getElementById("guy");
-let guyPositionX = parseInt(window.getComputedStyle(guy).left) || 0;
-let guyPositionY = 0;
-let screenWidth = window.innerWidth;
-
-
-function loadIntro(){
-  window.location.href = "../html/intro.html";
-}
-
-
-
-function startStory() {
-  let intro = document.getElementById("intro");
-  intro.style.display = "none";
-  const textElement = document.createElement("h2");
-  textElement.classList.add("text");
-  infoContainer.appendChild(textElement);
-  typeWriter(scene.text, textElement)
-  let buttons = scene.buttons || [];
-  if (buttons.length > 0) {
-    buttons.forEach((button) => {
-      checkColor(button);
-    });
-  }
-
-  
-}
-
-
 
 function nextScene(id) {
   infoContainer.innerHTML = "";
   buttonContainer.innerHTML = "";
   scene = scenes[id - 1];
-  
-
   const textElement = document.createElement("h2");
+  textElement.textContent = scene.text;
   textElement.classList.add("text");
   infoContainer.appendChild(textElement);
   typeWriter(scene.text, textElement);
-
   let buttons = scene.buttons || [];
   if (buttons.length > 0) {
     buttons.forEach((button) => {
@@ -898,10 +818,7 @@ function nextScene(id) {
 
 
 function checkColor(button) {
-  console.log(buttonContainer);
-  console.log(button);
   if (button.label.includes("Next")) {
-    console.log("this should work")
     buttonContainer.innerHTML += `<button class="next"
     onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
     console.log(buttonContainer);
@@ -915,50 +832,12 @@ function checkColor(button) {
 }
 
 
-document.addEventListener("click", (e) =>{
-  if(scene.text.toLowerCase().includes("smoke")){
-    const smoke = document.createElement("div");
-    smoke.classList.add("smoke");
-    smoke.style.left = e.clientX + "px";
-    smoke.style.top = e.clientY + "px";
-  
-    document.body.appendChild(smoke);
-    setTimeout(() =>{
-      smoke.remove()
-    }, 1500)
-  }
-
-})
-
-
-
-document.addEventListener("keydown", (e) => {
-
-  if (e.code === "ArrowRight" || e.code === "KeyD") {
-    if (guyPositionX < screenWidth - guy.offsetWidth) {
-      guyPositionX += 10;
-      guy.style.left = guyPositionX + "px";
-    }
-  }
-
-
-  if (e.code === "ArrowLeft" || e.code === "KeyA") {
-    if (guyPositionX > 380) {
-      guyPositionX -= 10;
-      guy.style.left = guyPositionX + "px";
-    }
-  }
-
-});
-
-function typeWriter(text, element){
+function typeWriter(description, element){
   element.innerHTML = "";
   let characterIndexPlace = 0;
   function typeNextCharacter(){
-    if(characterIndexPlace < text.length){
-      element.innerHTML += text.charAt(characterIndexPlace);
-      typeWriterSound.currentTime = 0;
-      typeWriterSound.play();
+    if(characterIndexPlace < description.length){
+      element.innerHTML += description.charAt(characterIndexPlace);
 
       characterIndexPlace++
 
@@ -970,4 +849,4 @@ function typeWriter(text, element){
 }
 
 
-
+nextScene(1)
