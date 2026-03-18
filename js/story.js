@@ -805,6 +805,7 @@ function nextScene(id) {
   textElement.textContent = scene.text;
   textElement.classList.add("text");
   infoContainer.appendChild(textElement);
+  typeWriter(scene.text, textElement);
   let buttons = scene.buttons || [];
   if (buttons.length > 0) {
     buttons.forEach((button) => {
@@ -828,6 +829,23 @@ function checkColor(button) {
         buttonContainer.innerHTML += `<button style="background-color:${button.color}"
         onclick="nextScene(${button.targetSceneId})" class="choices">${button.label}</button>`;
       }
+}
+
+
+function typeWriter(description, element){
+  element.innerHTML = "";
+  let characterIndexPlace = 0;
+  function typeNextCharacter(){
+    if(characterIndexPlace < description.length){
+      element.innerHTML += description.charAt(characterIndexPlace);
+
+      characterIndexPlace++
+
+      let typeWriterSpeed = Number(document.getElementById("speedTypeWriter").value);
+      setTimeout(typeNextCharacter, typeWriterSpeed)
+    }
+  }
+  typeNextCharacter()
 }
 
 

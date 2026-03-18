@@ -27,10 +27,10 @@ body{
 #title{
     color: white;
     font-size: 3rem;
-    margin: 0;
     padding: 0;
-    width: 97%;
+    width: 70%;
     margin-top: 70px;
+    margin-left: 10px;
 }
 
 
@@ -225,14 +225,7 @@ body{
     animation: blinkingStars 1s infinite;
 }
 
-#options{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.75);
-    width: 200px;
-    height: 30px;
-}
+
 
 
 
