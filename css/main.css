@@ -42,21 +42,6 @@ body{
 }
 
 
-#story{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-
-#buttons{
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-}
 
 #info{
     display: flex;
@@ -76,45 +61,7 @@ body{
 }
 
 
-.next{
-    background-color: green;
-    width: 200px;
-    height: 70px;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-}
 
-.next:hover{
-    transform: scale(1.05);
-    box-shadow: 0 0 25px orange;
-}
-
-.back{
-    background-color: red;
-    width: 200px;
-    height: 70px;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-}
-
-.back:hover{
-    transform: scale(1.05);
-    box-shadow: 0 0 25px orange;
-}
-
-.choices{
-    width: 200px;
-    height: 70px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.choices:hover{
-    transform: scale(1.05);
-    box-shadow: 0 0 25px orange;
-}
 
 
 #startButton{

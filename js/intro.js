@@ -10,27 +10,44 @@ const infoScenes = [
     title: "How to play the game", 
     description: "You have to make difficult choices...", 
     buttons: [
-      { label: "Back", targetSceneId: 1, color: "#FF0000" }, 
-      { label: "Next", targetSceneId: 3, color: "#33CE15" }
+      { 
+        label: "Back", 
+        targetSceneId: 1, 
+        color: "#FF0000" }, 
+      { 
+        label: "Next", 
+        targetSceneId: 3, 
+        color: "#33CE15" }
     ] 
   },
   { id: 3, 
-    description: "Careful, each choice has its own Consequence", 
+    bigText: "Careful, each choice has its own Consequence", 
     buttons: [
-      { label: "Back", targetSceneId: 2, color: "#FF0000" }, 
-      { label: "Next", targetSceneId: 4, color: "#33CE15" }
+      { 
+        label: "Back", 
+        targetSceneId: 2, 
+        color: "#FF0000" }, 
+      { 
+        label: "Next", 
+        targetSceneId: 4, 
+        color: "#33CE15" }
     ] 
   },
   { id: 4, 
-    description: "Let´s",
-    buttons: [{ label: "Back", 
-    targetSceneId: 3, 
-    color: "#FF0000" }, 
-    { label: "Next", targetSceneId: 5, color: "#33CE15" }
+    bigText: "Let´s",
+    buttons: [
+      { 
+      label: "Back", 
+      targetSceneId: 3, 
+      color: "#FF0000" }, 
+    { 
+      label: "Next", 
+      targetSceneId: 5, 
+      color: "#33CE15" }
   ] 
 },
   { id: 5, 
-    description: "Go", 
+    bigText: "Go", 
     buttons: [
       { label: "Back", targetSceneId: 4, color: "#FF0000" }, 
       { label: "Start Story", targetSceneId: "story", color: "#33CE15" }
@@ -52,18 +69,29 @@ function gotoNextScene() {
 
   const titleElement = document.createElement("h1");
   const textElement = document.createElement("p");
+  const bigTextElement = document.createElement("p");
   textElement.classList.add("description")
   titleElement.classList.add("text");
+  bigTextElement.classList.add("bigText");
   titleElement.textContent = scene.title;
   textElement.textContent = scene.description;
+  bigTextElement.textContent = scene.bigText;
   infoContainer.appendChild(titleElement);
   infoContainer.appendChild(textElement)
+  infoContainer.appendChild(bigTextElement)
 
   scene.buttons.forEach(button => {
     const btn = document.createElement("button");
     btn.textContent = button.label;
     btn.style.backgroundColor = button.color;
-    btn.className = button.label.includes("Next") ? "next" : button.label.includes("Back") ? "back" : "choices"; // Sjekkerm noe er sant eller ikke! Detter får vi back, next eller choice knpper som har forskjellige funksjoner
+    btn.classList.add("buttons");
+    if (button.label.includes("Next")) {
+      btn.classList.add("next");
+    } else if (button.label.includes("Back")) {
+        btn.classList.add("back");
+    } else {
+      btn.classList.add("choices");
+}
     btn.onclick = () => nextIntroScene(button.targetSceneId);
     buttonContainer.appendChild(btn);
   });
