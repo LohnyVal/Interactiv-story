@@ -70,7 +70,7 @@ input[type="range"]::-webkit-slider-thumb{
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 380px;
+    top: 330px;
     position: relative;
     
 }
