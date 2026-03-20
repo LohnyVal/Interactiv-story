@@ -812,7 +812,7 @@ const infoScenes = [
   },
   {
     id: 3,
-    description: "Careful, each choice has its own Consequence",
+    description: "Careful, each choice",
     buttons: [
       { label: "Back", targetSceneId: 2, color: "#FF0000" },
       { label: "Next", targetSceneId: 4, color: "#33CE15" }

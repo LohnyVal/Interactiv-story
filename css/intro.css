@@ -2,6 +2,7 @@ html, body{
     margin: 0;
     background-color: black;
     height: 100%;
+    width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -22,9 +23,11 @@ html, body{
 #intro{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     position: relative;
     text-align: center;
     width: 100%;
+    height: 80%;
     z-index: 1; 
     font-family: "LibreFranklin";
 
@@ -37,19 +40,29 @@ html, body{
     justify-content: center;
 }
 
-.buttons{
-    width: 200px;
-    height: 60px;
-    border: none;
-    border-radius: 10px;
-    margin: 50px;
-    cursor: pointer;
+#buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 300px;
+    position: relative;
+}
 
+.buttons{
+    width: 240px;
+    height: 60px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 30px;
+    border: none;
+    font-size: 1.5rem;
+    transition: 200ms;
 }
 
 .text{
     color: white;
     width: 100%;
+    font-size: 4rem;
     
 
 }
@@ -59,13 +72,20 @@ html, body{
     font-size: 4rem;
     width: 50%;
     margin: 0 auto;
-    text-align: center;
 }
 
 .description{
     color: white;
+    font-size: 1.7rem;
     
 }
+
+
+
+
+
+
+
 
 @keyframes blinkingStars{
     25% { 
