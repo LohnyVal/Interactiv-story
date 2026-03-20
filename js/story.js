@@ -796,6 +796,7 @@ let infoContainer = document.getElementById("info");
 let buttonContainer = document.getElementById("buttons");
 
 let scene = scenes[0];
+let isTyping = false; // Husk denne for å ikke trykke videre når typeWriter gjør jobben sin
 
 function nextScene(id) {
   infoContainer.innerHTML = "";
@@ -844,16 +845,42 @@ function typeWriter(description, element){
   let characterIndexPlace = 0;
   function typeNextCharacter(){
     if(characterIndexPlace < description.length){
+      isTyping = true;
       element.innerHTML += description.charAt(characterIndexPlace);
 
       characterIndexPlace++
 
       let typeWriterSpeed = Number(document.getElementById("speedTypeWriter").value);
       setTimeout(typeNextCharacter, typeWriterSpeed)
+    }else{
+      isTyping = false;
     }
   }
+
   typeNextCharacter()
 }
 
 
 nextScene(1)
+
+document.addEventListener("keydown", (e) =>{
+  if(isTyping){
+    return;
+  }
+  if(e.code === "ArrowLeft"){
+    goNextSceneViaButtons("back")
+  }else if(e.code === "ArrowRight"){
+    goNextSceneViaButtons("next")
+  }
+})
+
+
+function goNextSceneViaButtons(direction){
+  const button = scene.buttons.find(btn => 
+    direction === "next" 
+    ? btn.label.includes("Next")
+    : btn.label.includes("Back"));
+    if(button){
+      nextScene(button.targetSceneId);
+    }
+}

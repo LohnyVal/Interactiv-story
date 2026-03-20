@@ -10,3 +10,4 @@ TODO
 ## Loop gjennom storyScenes på story.html
 #### function startStory() {}
 ####  startStory()
+##### Done YESSSS

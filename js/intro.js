@@ -109,3 +109,24 @@ function nextIntroScene(id) {
 startIntro();
 
 
+document.addEventListener("keydown", (e) =>{
+  if(e.code === "ArrowLeft"){
+    goNextSceneViaButtons("back")
+  }else if(e.code === "ArrowRight"){
+    goNextSceneViaButtons("next")
+  }
+})
+
+function goNextSceneViaButtons(direction){
+  const button = scene.buttons.find(btn => 
+    direction === "next" 
+    ? btn.label.includes("Next") || btn.targetSceneId === "story"
+    : btn.label.includes("Back"));
+    if(button){
+      nextIntroScene(button.targetSceneId);
+    }
+}
+
+
+
+

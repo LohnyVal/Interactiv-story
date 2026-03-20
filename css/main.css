@@ -26,11 +26,10 @@ body{
 
 #title{
     color: white;
-    font-size: 3rem;
+    font-size: 4.5rem;
     padding: 0;
     width: 70%;
-    margin-top: 70px;
-    margin-left: 10px;
+
 }
 
 
@@ -46,18 +45,17 @@ body{
 #info{
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    
 }
 
 .text{
     color: white;
     background-color: rgba(128, 128, 128, 0.278);
     width: 50%;
-    margin-bottom: 60px;
     border: 2px solid white;
     border-radius: 10px;
-    padding: 40px;
-    backdrop-filter: blur(10px);
+  
 }
 
 
@@ -66,7 +64,7 @@ body{
 
 #startButton{
     position: relative;
-    margin-top: 340px;
+    margin-top: 200px;
     width: 200px;
     height: 60px;
     border-radius: 10px;
@@ -74,6 +72,7 @@ body{
     color: white;
     cursor: pointer;
     z-index: 1;
+    border: none;
 }
 
 #startButton::before{

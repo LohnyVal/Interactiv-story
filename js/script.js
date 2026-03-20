@@ -8,6 +8,12 @@ function loadIntro(){
   window.location.href = "../html/intro.html";
 }
 
+document.addEventListener("keydown", (e) =>{
+  if(e.code === "Enter"){
+    window.location.href = "../html/intro.html"
+  }
+})
+
 
 
 document.addEventListener("click", (e) =>{
