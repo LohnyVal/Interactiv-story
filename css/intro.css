@@ -19,18 +19,47 @@ html, body{
     
 }
 
-.intro{
+#intro{
     display: flex;
-    justify-content: center;
     flex-direction: column;
     position: relative;
     text-align: center;
-    width: 50%;
+    width: 100%;
     z-index: 1; 
+    font-family: "LibreFranklin";
+
+
+}
+
+#info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.buttons{
+    width: 200px;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    margin: 50px;
+    cursor: pointer;
+
 }
 
 .text{
     color: white;
+    width: 100%;
+    
+
+}
+
+.bigText{
+    color: white;
+    font-size: 4rem;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .description{
@@ -51,4 +80,10 @@ html, body{
     100% { 
         opacity: 1; 
     }
+}
+
+
+@font-face {
+    font-family: "LibreFranklin";
+    src: url("../font/LibreFranklin-VariableFont_wght.ttf");
 }

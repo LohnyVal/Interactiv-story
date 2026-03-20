@@ -12,7 +12,7 @@ const scenes = [
   },
   {
     id: 2,
-    text: "Marcus house stands only minutes away from the burning flames. Heat presses against the walls, and the air is thick with smoke. His phone suddenly vibrates in his hand",
+    text: "Marcus’s house stands only minutes away from the burning flames. Heat presses against the walls, and the air is thick with smoke. His phone suddenly vibrates in his hand. An alert “Evacuate”. What should he do?",
     buttons: [
       {
         label: "Evacuate",
@@ -796,6 +796,7 @@ let infoContainer = document.getElementById("info");
 let buttonContainer = document.getElementById("buttons");
 
 let scene = scenes[0];
+let isTyping = false; // Husk denne for å ikke trykke videre når typeWriter gjør jobben sin
 
 function nextScene(id) {
   infoContainer.innerHTML = "";
@@ -818,18 +819,25 @@ function nextScene(id) {
 
 
 function checkColor(button) {
+
+  const btn = document.createElement("button");
+  btn.textContent = button.label;
+  btn.onclick = () => nextScene(button.targetSceneId);
+
   if (button.label.includes("Next")) {
-    buttonContainer.innerHTML += `<button class="next"
-    onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
-    console.log(buttonContainer);
-      } else if (button.label.includes("Back")) {
-        buttonContainer.innerHTML += `<button class="back"
-        onclick="nextScene(${button.targetSceneId})">${button.label}</button>`;
-      } else {
-        buttonContainer.innerHTML += `<button style="background-color:${button.color}"
-        onclick="nextScene(${button.targetSceneId})" class="choices">${button.label}</button>`;
-      }
+    btn.classList.add("next");
+    btn.style.backgroundColor = button.color;   
+  } else if (button.label.includes("Back")) {
+    btn.classList.add("back");
+    btn.style.backgroundColor = button.color;
+  } else {
+    btn.classList.add("choices");
+    btn.style.backgroundColor = button.color;
+  }
+
+  buttonContainer.appendChild(btn);
 }
+
 
 
 function typeWriter(description, element){
@@ -837,16 +845,42 @@ function typeWriter(description, element){
   let characterIndexPlace = 0;
   function typeNextCharacter(){
     if(characterIndexPlace < description.length){
+      isTyping = true;
       element.innerHTML += description.charAt(characterIndexPlace);
 
       characterIndexPlace++
 
       let typeWriterSpeed = Number(document.getElementById("speedTypeWriter").value);
       setTimeout(typeNextCharacter, typeWriterSpeed)
+    }else{
+      isTyping = false;
     }
   }
+
   typeNextCharacter()
 }
 
 
 nextScene(1)
+
+document.addEventListener("keydown", (e) =>{
+  if(isTyping){
+    return;
+  }
+  if(e.code === "ArrowLeft"){
+    goNextSceneViaButtons("back")
+  }else if(e.code === "ArrowRight"){
+    goNextSceneViaButtons("next")
+  }
+})
+
+
+function goNextSceneViaButtons(direction){
+  const button = scene.buttons.find(btn => 
+    direction === "next" 
+    ? btn.label.includes("Next")
+    : btn.label.includes("Back"));
+    if(button){
+      nextScene(button.targetSceneId);
+    }
+}
