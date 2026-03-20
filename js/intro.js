@@ -21,7 +21,7 @@ const infoScenes = [
     ] 
   },
   { id: 3, 
-    bigText: "Careful, each choice", 
+    bigText: "Careful, each choice has its own Consequence", 
     buttons: [
       { 
         label: "Back", 
