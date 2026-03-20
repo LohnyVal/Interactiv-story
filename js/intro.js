@@ -21,7 +21,7 @@ const infoScenes = [
     ] 
   },
   { id: 3, 
-    bigText: "Careful, each choice has its own Consequence", 
+    bigText: "Careful, each choice", 
     buttons: [
       { 
         label: "Back", 
@@ -60,13 +60,18 @@ const buttonContainer = document.getElementById("buttons");
 let scene = infoScenes[0];
 
 function startIntro() {
+  const savedId = localStorage.getItem("introScene");
+  if(savedId){
+    scene = infoScenes[parseInt(savedId) - 1]
+  }
   gotoNextScene();
 }
+
+
 
 function gotoNextScene() {
   infoContainer.innerHTML = "";
   buttonContainer.innerHTML = "";
-
   const titleElement = document.createElement("h1");
   const textElement = document.createElement("p");
   const bigTextElement = document.createElement("p");
@@ -99,9 +104,11 @@ function gotoNextScene() {
 
 function nextIntroScene(id) {
   if (id === "story") {
+    localStorage.removeItem("introScene")
     window.location.href = "story.html";  
     return;
   }
+  localStorage.setItem("introScene", id)
   scene = infoScenes[id - 1]; 
   gotoNextScene();
 }
@@ -126,6 +133,9 @@ function goNextSceneViaButtons(direction){
       nextIntroScene(button.targetSceneId);
     }
 }
+
+
+
 
 
 

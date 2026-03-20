@@ -796,9 +796,20 @@ let infoContainer = document.getElementById("info");
 let buttonContainer = document.getElementById("buttons");
 
 let scene = scenes[0];
-let isTyping = false; // Husk denne for å ikke trykke videre når typeWriter gjør jobben sin
+
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Backspace") {
+    localStorage.removeItem("storyScene");
+    scene = scenes[0];
+    window.location.href = "../index.html"
+  }
+});
+
+
 
 function nextScene(id) {
+  localStorage.setItem("storyScene", id)
   infoContainer.innerHTML = "";
   buttonContainer.innerHTML = "";
   scene = scenes[id - 1];
@@ -861,7 +872,9 @@ function typeWriter(description, element){
 }
 
 
-nextScene(1)
+const savedStoryScene = localStorage.getItem("storyScene");
+nextScene(savedStoryScene ? parseInt(savedStoryScene) : 1);
+
 
 document.addEventListener("keydown", (e) =>{
   if(isTyping){
@@ -884,3 +897,15 @@ function goNextSceneViaButtons(direction){
       nextScene(button.targetSceneId);
     }
 }
+
+
+const optionsBtn = document.getElementById("options");
+const showOption = document.getElementById("option");
+
+optionsBtn.addEventListener("click", () => {
+  const isVisble = 
+  showOption.style.display = "flex";
+  optionsBtn.style.animation = "none";
+  optionsBtn.offsetHeight; 
+  optionsBtn.style.animation = "rotate 1s";
+});
