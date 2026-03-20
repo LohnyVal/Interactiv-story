@@ -903,9 +903,11 @@ const optionsBtn = document.getElementById("options");
 const showOption = document.getElementById("option");
 
 optionsBtn.addEventListener("click", () => {
-  const isVisble = 
-  showOption.style.display = "flex";
+  showOption.classList.toggle("slideIn")
+  optionsBtn.classList.toggle("rotated")
   optionsBtn.style.animation = "none";
   optionsBtn.offsetHeight; 
-  optionsBtn.style.animation = "rotate 1s";
+  optionsBtn.style.animation = optionsBtn.classList.contains("rotated") ? "rotate 1s" : "rotateBack 1s";
+
+  
 });
