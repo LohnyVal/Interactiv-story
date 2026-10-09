@@ -851,7 +851,7 @@ let screenWidth = window.innerWidth;
 
 
 function loadIntro(){
-  window.location.href = "./html/intro.html";
+  window.location.href = "../html/intro.html";
 }
 
 
