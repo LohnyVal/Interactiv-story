@@ -856,6 +856,7 @@ function loadIntro(){
 
 
 
+
 function startStory() {
   let intro = document.getElementById("intro");
   intro.style.display = "none";
